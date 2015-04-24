@@ -39,6 +39,7 @@ sysctls:
   net.inet6.ip6.forwarding: 1
 firewall:
   enable_wan_ssh: 8022
+  enable_wan_ping: false
   port_forwardings: []
 # Sample port forwards
 #    -
