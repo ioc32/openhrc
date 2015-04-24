@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ansible-playbook bootstrap.yml
-ansible-playbook ohrc.yml
+ansible-playbook stage1.yml
+ansible-playbook stage2.yml
 
 echo "System configured! It's time to reboot now. Have fun!"
