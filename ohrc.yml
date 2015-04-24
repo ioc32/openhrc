@@ -20,3 +20,6 @@
       - name: template dhcpd.conf
         template: backup=yes dest=/etc/dhcpd.conf src=templates/dhcpd.conf
                   owner=root group=wheel mode=0644
+      - name: template sysctl.conf
+        template: backup=yes dest=/etc/sysctl.conf src=templates/sysctl.conf
+                  owner=root group=wheel mode=0644
