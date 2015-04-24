@@ -1,2 +1,3 @@
 # templated by ansible
+
 {{hostname}}

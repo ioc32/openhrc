@@ -1,4 +1,5 @@
 # templated by ansible
+
 {% for k,v in daemons.iteritems() %}
 {% if v != None %}
 {{k}}_flags="{{v}}"
