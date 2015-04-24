@@ -64,7 +64,7 @@ Once you have installed [OpenBSD][openbsd] you are ready to install OpenHRC.
 
 * Download and execute the bootstrap script (as root)
 ~~~~~~
-  ftp https://raw.githubusercontent.com/ioc32/openhrc/master/bootstrap.sh -o - | sh
+  ftp -o - https://raw.githubusercontent.com/ioc32/openhrc/master/bootstrap.sh | sh
 ~~~~~~
   We know, piping things from the internet to the shell directly is not a good
   idea... You're more than welcome to check the contents of the script, which
