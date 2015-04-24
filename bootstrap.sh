@@ -10,7 +10,7 @@ pkg_add -z git
 
 # TODO: check if there is no .git directory
 echo "Downloading OHRC..."
-#git clone https://github.com/ioc32/ohrc
+git clone https://github.com/ioc32/openhrc
 
 echo "Bootstrap done, edit vars.yml and run configure.sh"
 
