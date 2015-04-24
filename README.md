@@ -1,7 +1,8 @@
 # OpenHRC
 
-OpenHRC (Open Household Router Contraption) is a set of ansible playbooks and
-scripts to easily setup and maintain a home router running OpenBSD.
+OpenHRC (Open Household Router Contraption) is a set of [Ansible][ansible]
+playbooks and scripts to easily setup and maintain a home router running
+[OpenBSD][openbsd].
 
 
 ## Overview
@@ -39,18 +40,19 @@ Included services:
 
 ## Hardware
 
-OpenHRC should work on any device which can run OpenBSD and has at least 2
-network interfaces. We have tested it successfully on the following devices:
+OpenHRC should work on any device which can run [OpenBSD][openbsd] and has at
+least 2 network interfaces. We have tested it successfully on the following
+devices:
 
-* PC Engines APU
-* Soekris net4801
+* [PC Engines APU][apu]
+* [Soekris net4801][soekris]
 
 
 ## Installation
 
-OpenHRC assumes you have successfully installed OpenBSD in your contraption.
-There are some recommended settings which should be chosen when making the
-installation:
+OpenHRC assumes you have successfully installed [OpenBSD][openbsd] in your
+contraption. There are some recommended settings which should be chosen when
+making the installation:
 
 * Create a new user account (while installting OpenHRC requires root access,
   it's generally not a good idea to always use the root account)
@@ -58,13 +60,13 @@ installation:
 * Enable console over serial port com0 (if you are installing OpenHRC on a
   headless device)
 
-Once you have installed OpenBSD you are ready to install OpenHRC.
+Once you have installed [OpenBSD][openbsd] you are ready to install OpenHRC.
 
 * Download and execute the bootstrap script (as root)
 ~~~~~~
   ftp https://raw.githubusercontent.com/ioc32/openhrc/master/bootstrap.sh -o - | sh
 ~~~~~~
-  I know, piping things from the internet to the shell directly is not a good
+  We know, piping things from the internet to the shell directly is not a good
   idea... You're more than welcome to check the contents of the script, which
   basically just installing a few basic packages and cloning this repository.
 * Edit vars.yml to your liking
@@ -85,4 +87,9 @@ with love.
 ## License
 
 Simplified BSD License. Check LICENSE file.
+
+[ansible]: http://www.ansible.com
+[openbsd]: http://www.openbsd.org
+[apu]: http://www.pcengines.ch/apu.htm
+[soekris]: http://soekris.com/products/eol-products/net4801.html
 
