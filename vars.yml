@@ -39,4 +39,16 @@ sysctls:
   net.inet6.ip6.forwarding: 1
 firewall:
   enable_wan_ssh: 8022
+  port_forwardings: []
+# Sample port forwards
+#    -
+#      external_ports: 8080
+#      target: 10.0.0.51
+#      internal_ports: 80
+#      protocols: tcp
+#    -
+#      external_ports: 1234
+#      target: 10.0.0.51
+#      internal_ports: 1234
+#      protocols: udp,tcp
 
