@@ -1,0 +1,22 @@
+---
+  - hosts: localhost
+    connection: local
+    vars_files:
+      - vars.yml
+    tasks:
+      - name: template pkg.conf
+        template: src=templates/pkg.conf dest=/etc/pkg.conf
+      - name: template /etc/myname
+        template: src=templates/myname dest=/etc/myname
+        notify: update hostname
+      - name: install base packages
+        openbsd_pkg: name={{item}} state=present
+        with_items: base_pkgs
+      - name: configure network intefaces
+        template: src=templates/hostname.if dest=/etc/hostname.{{item.name}}
+                  owner=root group=wheel mode=0640
+        with_items: interfaces
+        tags: test
+    handlers:
+      - name: restart network
+        command: sh /etc/netstart

@@ -1,0 +1,36 @@
+---
+mirror: ftp://ftp.eu.openbsd.org
+hostname: openhrc
+interfaces:
+  -
+    name: re0
+    ip4: dhcp
+    description: Uplink
+  -
+    name: re1
+    ip4: 10.0.0.1/24
+    description: The LAN
+wan_iface: re0
+lan_iface: re1
+base_pkgs:
+  - curl
+  - wget
+  - pftop
+  - bash
+  - vim--no_x11
+dhcp:
+  range: 10.0.0.50-10.0.0.100
+  extra_resolvers:
+    - 8.8.8.8
+    - 208.67.222.222
+ntp:
+  enable_server: true
+  pools:
+    - 0.pool.ntp.org
+daemons:
+  unbound: -c /var/unbound/etc/unbound.conf
+  ntpd:
+  sensorsd:
+  dhcpd: "{{lan_iface}}"
+disabled_daemons:
+  - sndiod

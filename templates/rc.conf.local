@@ -1,0 +1,12 @@
+{% for k,v in daemons.iteritems() %}
+{% if v != None %}
+{{k}}_flags="{{v}}"
+{% else %}
+{{k}}_flags=
+{% endif %}
+{% endfor %}
+
+{% for item in disabled_daemons %}
+{{item}}_flags=NO
+{% endfor %}
+
