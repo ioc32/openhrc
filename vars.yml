@@ -37,3 +37,6 @@ disabled_daemons:
 sysctls:
   net.inet.ip.forwarding: 1
   net.inet6.ip6.forwarding: 1
+firewall:
+  enable_wan_ssh: 8022
+
