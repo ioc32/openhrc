@@ -1,4 +1,4 @@
-# templated
+# templated by ansible
 {% set cidr_netmasks = {
      1:  "128.0.0.0",
      2:  "192.0.0.0",
