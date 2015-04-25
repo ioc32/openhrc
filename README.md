@@ -51,14 +51,7 @@ devices:
 ## Installation
 
 OpenHRC assumes you have successfully installed [OpenBSD][openbsd] in your
-contraption. There are some recommended settings which should be chosen when
-making the installation:
-
-* Create a new user account (while installting OpenHRC requires root access,
-  it's generally not a good idea to always use the root account)
-* Disable root login over SSH
-* Enable console over serial port com0 (if you are installing OpenHRC on a
-  headless device)
+contraption.
 
 Once you have installed [OpenBSD][openbsd] you are ready to install OpenHRC.
 
@@ -68,7 +61,7 @@ Once you have installed [OpenBSD][openbsd] you are ready to install OpenHRC.
 ~~~~~~
   We know, piping things from the internet to the shell directly is not a good
   idea... You're more than welcome to check the contents of the script, which
-  basically just installing a few basic packages and cloning this repository.
+  basically just installs a few basic packages and clones this repository.
 * Edit vars.yml to your liking
 * Run ./configure.sh
 * Reboot and have fun!
