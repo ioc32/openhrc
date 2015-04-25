@@ -53,4 +53,6 @@ firewall:
 #      target: 10.0.0.51
 #      internal_ports: 1234
 #      protocols: udp,tcp
+dns:
+  enable_query_logging: false
 
