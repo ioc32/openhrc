@@ -16,7 +16,7 @@
         template: src=templates/hostname.if dest=/etc/hostname.{{item.name}}
                   owner=root group=wheel mode=0640
         with_items: interfaces
-        tags: test
+        notify: restart network
     handlers:
       - name: restart network
         command: sh /etc/netstart
