@@ -20,3 +20,5 @@
     handlers:
       - name: restart network
         command: sh /etc/netstart
+      - name: update hostname
+        command: hostname {{hostname}}
