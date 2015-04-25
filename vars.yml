@@ -55,4 +55,6 @@ firewall:
 #      protocols: udp,tcp
 dns:
   enable_query_logging: false
+  enable_dnssec_validation: true
+  permissive_dnssec_validation: false
 
