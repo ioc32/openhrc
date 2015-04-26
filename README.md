@@ -93,7 +93,7 @@ Simplified BSD License. Check LICENSE file.
 
 **A:** If you are using a snapshot you might need to disable some kernel debugging:
 ~~~~~~
-sysctl -w kern.pool_debug=0
+sysctl kern.pool_debug=0
 ~~~~~~
 
 **Q:** How do I forward a range of ports?
