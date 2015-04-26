@@ -4,6 +4,9 @@
     vars_files:
       - vars.yml
     tasks:
+      - name: install user packages
+        openbsd_pkg: name={{item}} state=present
+        with_items: user_pkgs
       - name: template /etc files
         template: backup=yes dest=/etc/{{item}} owner=root
                   mode=0644 src=templates/{{item}}

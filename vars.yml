@@ -17,9 +17,8 @@ base_pkgs:
   - wget
   - pftop
   - bash
-  - tcptraceroute
-  - mtr--
   - vim--no_x11
+user_pkgs: []
 dhcp:
   range: 10.0.0.50-10.0.0.100
   extra_resolvers:
