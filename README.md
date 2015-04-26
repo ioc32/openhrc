@@ -119,7 +119,6 @@ port_forwardings:
 ~~~~~~
 dns:
   enable_dnssec_validation: false
-  permissive_dnssec_validation: false
 ~~~~~~
 or enable the permissive validation mode, which will ensure unbound keeps validating domains and passing responses down to clients even when validation fails (ad bit and SERVFAIL RCODE will not be set, of course):
 ~~~~~~
@@ -127,7 +126,6 @@ dns:
   enable_dnssec_validation: true
   permissive_dnssec_validation: true
 ~~~~~~
-After setting your variables, re-run stage2.yml.
 
 You may also need to remove all bogus data from unbound's cache:
 ~~~~~~
