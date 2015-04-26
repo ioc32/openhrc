@@ -29,13 +29,23 @@ ntp:
   enable_server: true
   pools:
     - 0.pool.ntp.org
-daemons:
-  unbound: -c /var/unbound/etc/unbound.conf
-  ntpd:
-  sensorsd:
-  dhcpd: "{{lan_iface}}"
-disabled_daemons:
-  - sndiod
+base_daemons:
+  -
+    name: unbound
+    args: -c /var/unbound/etc/unbound.conf
+  -
+    name: ntpd
+  -
+    name: dhcpd
+    args: "{{lan_iface}}"
+user_daemons: []
+# Sample user daemon
+#  -
+#    name: sndiod
+#    enabled: no
+#  -
+#    name: sensorsd
+#    enabled: yes
 sysctls:
   net.inet.ip.forwarding: 1
   net.inet6.ip6.forwarding: 1
