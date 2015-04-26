@@ -62,7 +62,7 @@ Once you have installed [OpenBSD][openbsd] you are ready to install OpenHRC.
   We know, piping things from the internet to the shell directly is not a good
   idea... You're more than welcome to check the contents of the script, which
   basically just installs a few basic packages and clones this repository.
-* Edit vars.yml to your liking
+* View vars.yml, override variables in local-vars.yml to your liking
 * Run ./configure.sh
 * Reboot and have fun!
 
@@ -112,6 +112,12 @@ port_forwardings:
 **Q:** No IPv6 support, are you serious?
 
 **A:** It's coming up in the next release, hold tight!
+
+**Q:** How can I override the variables used in the playbooks?
+
+**A:** You can provide your own variables in the local-vars.yml file.
+The user_* list variables are empty by default. Override those you need by adding them to local variables file.
+In order to override variables stored in dictionaries (like the firewall or dns sections, for example), you can override individual keys that will be merged with the remaining default keys.
 
 **Q:** My favorite site/TLD have screwed their DNSSEC. Is there anything I can do?
 

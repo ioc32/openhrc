@@ -12,5 +12,7 @@ pkg_add -z git
 echo "Downloading OHRC..."
 git clone https://github.com/ioc32/openhrc
 
-echo "Bootstrap done, edit vars.yml and run configure.sh"
+touch openhrc/local-vars.yml
+
+echo "Bootstrap done, set local variables in local-vars.yml and run configure.sh"
 
