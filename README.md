@@ -108,3 +108,8 @@ port_forwardings:
     internal_ports: 2000:3000
     protocols: udp,tcp
 ~~~~~~
+
+**Q:** No IPv6 support, are you serious?
+
+**A:** It's comming up in the next release, hold tight!
+
