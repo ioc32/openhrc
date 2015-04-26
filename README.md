@@ -69,7 +69,7 @@ Once you have installed [OpenBSD][openbsd] you are ready to install OpenHRC.
 
 ## Authors
 
-Brought you by:
+Brought to you by:
 
 * Iñigo Ortiz de Urbina Cazenave <inigo@infornografia.net>
 * Saúl Ibarra Corretgé <saghul@gmail.com>
@@ -111,5 +111,31 @@ port_forwardings:
 
 **Q:** No IPv6 support, are you serious?
 
-**A:** It's comming up in the next release, hold tight!
+**A:** It's coming up in the next release, hold tight!
 
+**Q:** My favorite site/TLD have screwed their DNSSEC. Is there anything I can do?
+
+**A:** You can either disable DNSSEC validation entirely (not recommended):
+~~~~~~
+dns:
+  enable_dnssec_validation: false
+  permissive_dnssec_validation: false
+~~~~~~
+or enable the permissive validation mode, which will ensure unbound keeps validating domains and passing responses down to clients even when validation fails (ad bit and SERVFAIL RCODE will not be set, of course):
+~~~~~~
+dns:
+  enable_dnssec_validation: true
+  permissive_dnssec_validation: true
+~~~~~~
+After setting your variables, re-run stage2.yml.
+
+You may also need to remove all bogus data from unbound's cache:
+~~~~~~
+# unbound-control flush_bogus
+ok removed 0 rrsets, 0 messages and 0 key entries
+~~~~~~
+or remove all labels below the broken zone:
+~~~~~~
+# unbound-control flush_zone ke. 
+ok removed 10 rrsets, 0 messages and 1 key entries
+~~~~~~
