@@ -86,3 +86,25 @@ Simplified BSD License. Check LICENSE file.
 [apu]: http://www.pcengines.ch/apu.htm
 [soekris]: http://soekris.com/products/eol-products/net4801.html
 
+
+## FAQ
+
+**Q:** I have bad throughput in my system, what's up?
+
+**A:** If you are using a snapshot you might need to disable some kernel debugging:
+~~~~~~
+sysctl -w kern.pool_debug=0
+~~~~~~
+
+**Q:** How do I forward a range of ports?
+
+**A:** When defining a port forwarding, the external_ports and internal_ports options
+can take a port range, using a colon:
+~~~~~~
+port_forwardings:
+  -
+    external_ports: 5000:6000
+    target: 10.0.0.51
+    internal_ports: 2000:3000
+    protocols: udp,tcp
+~~~~~~
