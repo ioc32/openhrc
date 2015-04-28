@@ -12,13 +12,7 @@ interfaces:
     description: The LAN
 wan_iface: re0
 lan_iface: re1
-base_pkgs:
-  - curl
-  - wget
-  - pftop
-  - bash
-  - vim--no_x11
-user_pkgs: []
+pkgs: []
 dhcp:
   range: 10.0.0.50-10.0.0.100
   extra_resolvers:
