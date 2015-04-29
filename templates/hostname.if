@@ -34,13 +34,13 @@
     31: "255.255.255.254",
     32: "255.255.255.255",
 } %}
-{% if item.ip4 == 'dhcp' %}
+{% if item.value.ip4 == 'dhcp' %}
 dhcp
 {% else %}
-{% set ip, cidr_mask = item.ip4.split('/') %}
+{% set ip, cidr_mask = item.value.ip4.split('/') %}
 inet {{ip}} {{cidr_netmasks[cidr_mask|int]}} NONE
 {% endif %}
-{% if item.description %}
-description "{{item.description}}"
+{% if item.value.description %}
+description "{{item.value.description}}"
 {% endif %}
 up

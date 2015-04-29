@@ -5,9 +5,9 @@
       - vars.yml
     tasks:
       - name: configure network intefaces
-        template: src=templates/hostname.if dest=/etc/hostname.{{item.name}}
+        template: src=templates/hostname.if dest=/etc/hostname.{{item.value.iface}}
                   owner=root group=wheel mode=0640
-        with_items: interfaces
+        with_dict: interfaces
         notify: restart network
     handlers:
       - name: restart network

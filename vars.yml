@@ -2,16 +2,14 @@
 mirror: ftp://ftp.eu.openbsd.org
 hostname: openhrc
 interfaces:
-  -
-    name: re0
+  wan:
+    iface: re0
     ip4: dhcp
     description: Uplink
-  -
-    name: re1
+  lan:
+    iface: re1
     ip4: 10.0.0.1/24
     description: The LAN
-wan_iface: re0
-lan_iface: re1
 pkgs: []
 dhcp:
   range: 10.0.0.50-10.0.0.100
@@ -37,7 +35,7 @@ base_daemons:
     name: ntpd
   -
     name: dhcpd
-    args: "{{lan_iface}}"
+    args: "{{interfaces.lan.iface}}"
 user_daemons: []
 # Sample user daemon
 #  -
