@@ -8,11 +8,15 @@ pkg_add -z python-2
 pkg_add -z ansible
 pkg_add -z git
 
-# TODO: check if there is no .git directory
-echo "Downloading OHRC..."
-git clone https://github.com/ioc32/openhrc
-
-touch openhrc/local-vars.yml
+if [[ -d ".git" ]]
+then
+    echo "Updating OHRC..."
+    git pull
+    touch local-vars.yml
+else
+    echo "Downloading OHRC..."
+    git clone https://github.com/ioc32/openhrc
+    touch openhrc/local-vars.yml
+fi
 
 echo "Bootstrap done, set local variables in local-vars.yml and run configure.sh"
-
