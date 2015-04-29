@@ -4,9 +4,6 @@
     vars_files:
       - vars.yml
     tasks:
-      - name: enable system services
-        service: name={{item.name}} args={{item.args}} enabled=yes
-        with_items: base_daemons
       - name: configure network intefaces
         template: src=templates/hostname.if dest=/etc/hostname.{{item.name}}
                   owner=root group=wheel mode=0640
