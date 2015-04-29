@@ -8,10 +8,10 @@
         openbsd_pkg: name={{item}} state=present
         with_items: pkgs
       - name: enable OpenHRC services
-        service: name={{item.name}} args={{item.args}} enabled=yes
+        service: name={{item.name}} args="{{item.args|default('')}}" enabled=yes
         with_items: base_daemons
       - name: enable user services
-        service: name={{item.name}} enabled={{item.enabled}} args={{item.args}}
+        service: name={{item.name}} args="{{item.args|default('')}}" enabled={{item.enabled}}
         with_items: user_daemons
       - name: template /etc files
         template: backup=yes dest=/etc/{{item}} owner=root
