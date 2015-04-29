@@ -7,7 +7,10 @@
       - name: install user packages
         openbsd_pkg: name={{item}} state=present
         with_items: pkgs
-      - name: enable system services
+      - name: enable OpenHRC services
+        service: name={{item.name}} args={{item.args}} enabled=yes
+        with_items: base_daemons
+      - name: enable user services
         service: name={{item.name}} enabled={{item.enabled}} args={{item.args}}
         with_items: user_daemons
       - name: template /etc files
@@ -18,6 +21,8 @@
           - dhcpd.conf
           - sysctl.conf
           - pf.conf
+          - myname
+          - pkg.conf
       - name: touch /etc/pf-custom.conf
         file: owner=root mode=0644 path=/etc/pf-custom.conf state=touch
         when: firewall.enable_custom_rules

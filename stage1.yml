@@ -4,11 +4,6 @@
     vars_files:
       - vars.yml
     tasks:
-      - name: template pkg.conf
-        template: src=templates/pkg.conf dest=/etc/pkg.conf
-      - name: template /etc/myname
-        template: src=templates/myname dest=/etc/myname
-        notify: update hostname
       - name: enable system services
         service: name={{item.name}} args={{item.args}} enabled=yes
         with_items: base_daemons
@@ -20,5 +15,3 @@
     handlers:
       - name: restart network
         command: sh /etc/netstart
-      - name: update hostname
-        command: hostname {{hostname}}
