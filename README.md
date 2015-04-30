@@ -62,6 +62,12 @@ Once you have installed [OpenBSD][openbsd] you are ready to install OpenHRC.
   We know, piping things from the internet to the shell directly is not a good
   idea... You're more than welcome to check the contents of the script, which
   basically just installs a few basic packages and clones this repository.
+  Alternatively, you can clone this repo and manually run the bootstrapping
+  script (you'll need to install git first):
+~~~~~~
+  git clone https://github.com/ioc32/openhrc && cd openhrc
+  ./bootstrap.sh
+~~~~~~
 * View vars.yml, override variables in local-vars.yml to your liking
 * Run ./configure.sh
 * Reboot and have fun!
