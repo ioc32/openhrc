@@ -50,6 +50,8 @@ devices:
 
 ## Installation
 
+Watch [the video!][video]
+
 OpenHRC assumes you have successfully installed [OpenBSD][openbsd] in your
 contraption.
 
@@ -91,6 +93,7 @@ Simplified BSD License. Check LICENSE file.
 [openbsd]: http://www.openbsd.org
 [apu]: http://www.pcengines.ch/apu.htm
 [soekris]: http://soekris.com/products/eol-products/net4801.html
+[video]: https://www.youtube.com/watch?v=LZeKDM5jc90
 
 
 ## FAQ
