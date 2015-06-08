@@ -51,6 +51,7 @@ firewall:
   enable_wan_ssh: 8022
   enable_wan_ping: false
   enable_custom_rules: false
+  enable_upnp: false
   port_forwardings: []
 # Sample port forwards
 #    -
