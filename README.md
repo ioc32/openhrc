@@ -36,6 +36,7 @@ Included services:
 * NTP server
 * Local caching DNS resolver
 * Firewall
+* UPnP daemon
 
 
 ## Hardware
