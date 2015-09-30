@@ -31,7 +31,7 @@ dns:
 ntp:
   enable_server: true
   pools:
-    - 0.pool.ntp.org
+    - 0.openbsd.pool.ntp.org
 base_daemons:
   -
     name: unbound
