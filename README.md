@@ -32,11 +32,12 @@ following (quite common) scenario:
 
 Included services:
 
-* DHCP server
-* NTP server
+* DHCP
+* NTP
 * Local caching DNS resolver
 * Firewall
-* UPnP daemon
+* UPnP
+* DDNS
 
 
 ## Hardware
@@ -150,6 +151,6 @@ ok removed 0 rrsets, 0 messages and 0 key entries
 ~~~~~~
 or remove all labels below the broken zone:
 ~~~~~~
-# unbound-control flush_zone ke. 
+# unbound-control flush_zone ke.
 ok removed 10 rrsets, 0 messages and 1 key entries
 ~~~~~~
