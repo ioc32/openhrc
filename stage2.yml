@@ -34,15 +34,15 @@
         command: unbound-control-setup -d /var/unbound/etc/
         args:
           creates: /var/unbound/etc/unbound_server.key
-      - name: install miniupnpd
+      - name: install upnp service
         openbsd_pkg: name=miniupnpd state=present
         when: firewall.enable_upnp
-      - name: enable miniupnpd service
-        service: name=miniupnpd args="" enabled=yes
-        when: firewall.enable_upnp
-      - name: template miniupnpd configuration file
+      - name: template upnp service configuration file
         template: backup=yes dest=/etc/miniupnpd.conf owner=root
                   mode=0644 src=templates/miniupnpd.conf
+        when: firewall.enable_upnp
+      - name: enable upnp service
+        service: name=miniupnpd args="" enabled=yes
         when: firewall.enable_upnp
       - name: install ddns service
         openbsd_pkg: name=inadyn state=present
