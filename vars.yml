@@ -70,4 +70,11 @@ firewall:
 #      target: 10.0.0.51
 #      internal_ports: 1234
 #      protocols: udp,tcp
+ddns:
+    enabled: false
+    update_period_sec: 600
+    username: test
+    password: test
+    dyndns_system: default@freedns.afraid.org
+    alias: test.mooo.com
 
