@@ -10,6 +10,16 @@
                   owner=root group=wheel mode=0640
         with_dict: interfaces
         notify: restart network
+      - name: configure gateway
+        template: src=templates/mygate dest=/etc/mygate
+                  owner=root group=wheel mode=0640
+        with_dict: interfaces.wan
+        when: interfaces.wan.gateway
+        notify: restart network
+      - name: configure gateway (2)
+        file: path=/etc/mygate state=absent
+        when: not interfaces.wan.gateway
+        notify: restart network
     handlers:
       - name: restart network
         command: sh /etc/netstart

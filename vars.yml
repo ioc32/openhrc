@@ -5,6 +5,7 @@ interfaces:
   wan:
     iface: re0
     ip4: dhcp
+    gateway: false
     description: Uplink
   lan:
     iface: re1
