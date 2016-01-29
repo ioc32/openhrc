@@ -21,14 +21,15 @@ dhcp:
 #     mac: ca:fe:ca:fe:ca:fe
 #     ip: 10.0.0.55
 dns:
-  enable_query_logging: false
-  enable_dnssec_validation: true
-  permissive_dnssec_validation: false
-  forwarders: []
-# Sample forwarders
-#    - 8.8.8.8
-#    - 64.6.64.6
-#    - 208.67.222.222
+  recursive:
+    enable_query_logging: false
+    enable_dnssec_validation: true
+    permissive_dnssec_validation: false
+    forwarders: []
+  # Sample forwarders
+  #    - 8.8.8.8
+  #    - 64.6.64.6
+  #    - 208.67.222.222
 ntp:
   enable_server: true
   pools:
