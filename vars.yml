@@ -30,6 +30,12 @@ dns:
   #    - 8.8.8.8
   #    - 64.6.64.6
   #    - 208.67.222.222
+  authoritative:
+    zone: home.lan
+    records: []
+  # Sample records
+  #   - router IN A   10.0.0.1
+  #   - foo IN A   10.0.0.2
 ntp:
   enable_server: true
   pools:
@@ -43,6 +49,9 @@ base_daemons:
   -
     name: dhcpd
     args: "{{interfaces.lan.iface}}"
+  -
+    name: nsd
+    args: -c /var/nsd/etc/nsd.conf
 user_daemons: []
 # Sample user daemon
 #  -

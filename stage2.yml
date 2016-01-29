@@ -34,6 +34,12 @@
         command: unbound-control-setup -d /var/unbound/etc/
         args:
           creates: /var/unbound/etc/unbound_server.key
+      - name: template nsd.conf
+        template: backup=yes dest=/var/nsd/etc/nsd.conf
+                  owner=root group=_nsd mode=0640 src=templates/nsd.conf
+      - name: template authoritative DNS zone
+        template: backup=yes dest=/var/nsd/zones/{{ dns.authoritative.zone }}.zone
+                  src=templates/home.lan.zone
       - name: install upnp service
         openbsd_pkg: name=miniupnpd state=present
         when: firewall.enable_upnp

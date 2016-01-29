@@ -1,0 +1,18 @@
+; templated by ansible
+
+$TTL    3600
+$ORIGIN {{ dns.authoritative.zone }}.
+@  1D  IN  SOA ns0.{{ dns.authoritative.zone }}. hostmaster.{{ dns.authoritative.zone }}. (
+                              1 ; serial
+                              3H ; refresh
+                              15 ; retry
+                              1w ; expire
+                              3h ; minimum
+                             )
+       IN  NS     ns0.{{ dns.authoritative.zone }}.
+; glue record
+ns0    IN A      127.0.0.1
+; user records
+{% for item in dns.authoritative.records %}
+{{ item }}
+{% endfor %}
