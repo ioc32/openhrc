@@ -34,7 +34,8 @@ Included services:
 
 * DHCP
 * NTP
-* Local caching DNS resolver
+* Local caching and validating DNS resolver
+* Authoritative DNS server for a configurable zone
 * Firewall
 * UPnP
 * DDNS
@@ -135,13 +136,15 @@ In order to override variables stored in dictionaries (like the firewall or dns 
 **A:** You can either disable DNSSEC validation entirely (not recommended):
 ~~~~~~
 dns:
-  enable_dnssec_validation: false
+  recursive:
+      enable_dnssec_validation: false
 ~~~~~~
 or enable the permissive validation mode, which will ensure unbound keeps validating domains and passing responses down to clients even when validation fails (ad bit and SERVFAIL RCODE will not be set, of course):
 ~~~~~~
 dns:
-  enable_dnssec_validation: true
-  permissive_dnssec_validation: true
+  recursive:
+    enable_dnssec_validation: true
+    permissive_dnssec_validation: true
 ~~~~~~
 
 You may also need to remove all bogus data from unbound's cache:
@@ -154,3 +157,20 @@ or remove all labels below the broken zone:
 # unbound-control flush_zone ke.
 ok removed 10 rrsets, 0 messages and 1 key entries
 ~~~~~~
+
+**Q:** How can I configure the authoritative DNS server?
+
+**A:** The default zone is "home.lan", you can override it and create custom records by editing
+local-vars.yml:
+
+~~~~~~
+dns:
+  authoritative:
+    zone: kasa.lan
+    records:
+      - foo.kasa.lan IN A 10.0.0.20
+      - bar.kasa.lan IN A 10.0.0.30
+~~~~~~
+
+**Q:** Is the authoritative DNS server accessible externally?
+**A:** No, NSD binds to localhost and only unbound (servicing LAN queries) forwards queries to it.
