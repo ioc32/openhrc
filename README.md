@@ -173,4 +173,5 @@ dns:
 ~~~~~~
 
 **Q:** Is the authoritative DNS server accessible externally?
+
 **A:** No, NSD binds to localhost and only unbound (servicing LAN queries) forwards queries to it.
