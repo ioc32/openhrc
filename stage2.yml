@@ -48,8 +48,7 @@
                   mode=0644 src=templates/miniupnpd.conf
         when: firewall.enable_upnp
       - name: enable upnp service
-        service: name=miniupnpd args="" enabled=yes
-        when: firewall.enable_upnp
+        service: name=miniupnpd args="" enabled={{ "yes" if firewall.enable_upnp else "no" }}
       - name: install ddns service
         openbsd_pkg: name=inadyn state=present
         when: ddns.enabled
@@ -58,5 +57,4 @@
                   mode=0644 src=templates/inadyn.conf
         when: ddns.enabled
       - name: enable ddns service
-        service: name=inadyn args="" enabled=yes
-        when: ddns.enabled
+        service: name=inadyn args="" enabled={{ "yes" if ddns.enabled else "no" }}
