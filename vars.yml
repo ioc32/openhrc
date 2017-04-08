@@ -25,6 +25,7 @@ dns:
     enable_query_logging: false
     enable_dnssec_validation: true
     permissive_dnssec_validation: false
+    syslog: false
     forwarders: []
   # Sample forwarders
   #    - 8.8.8.8
