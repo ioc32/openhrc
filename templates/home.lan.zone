@@ -16,3 +16,6 @@ ns0    IN A      127.0.0.1
 {% for item in dns.authoritative.records %}
 {{ item }}
 {% endfor %}
+{% for entry in dhcp.static_mappings %}
+{{ entry.host }}               IN      A       {{ entry.ip }}
+{% endfor %}
