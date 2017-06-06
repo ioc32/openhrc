@@ -20,7 +20,7 @@
           - sysctl.conf
           - pf.conf
           - myname
-          - pkg.conf
+          - installurl
       - name: touch /etc/pf-custom.conf
         file: owner=root mode=0644 path=/etc/pf-custom.conf state=touch
         when: firewall.enable_custom_rules
