@@ -5,15 +5,12 @@
     vars_files:
       - vars.yml
     tasks:
-      - name: install user packages
-        openbsd_pkg: name={{item}} state=present
-        with_items: pkgs
       - name: enable OpenHRC services
-        service: name={{item.name}} args="{{item.args|default('')}}" enabled=yes
-        with_items: base_daemons
+        service: name={{item.name}} args="{{ item.args|default('') }} " enabled=yes
+        with_items: "{{ base_daemons }}"
       - name: enable user services
         service: name={{item.name}} args="{{item.args|default('')}}" enabled={{item.enabled}}
-        with_items: user_daemons
+        with_items: "{{ user_daemons }}"
       - name: template /etc files
         template: backup=yes dest=/etc/{{item}} owner=root
                   mode=0644 src=templates/{{item}}
@@ -56,5 +53,8 @@
         template: backup=yes dest=/etc/inadyn.conf owner=root
                   mode=0644 src=templates/inadyn.conf
         when: ddns.enabled
+      - name: install user packages
+        openbsd_pkg: name={{item}} state=present
+        with_items: "{{ pkgs }}"
       - name: enable ddns service
         service: name=inadyn args="" enabled={{ "yes" if ddns.enabled else "no" }}
