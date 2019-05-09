@@ -33,6 +33,7 @@
           - pf.conf
           - myname
           - installurl
+          - ethers
       - name: touch /etc/pf-custom.conf
         file: owner=root mode=0644 path=/etc/pf-custom.conf state=touch
         when: firewall.enable_custom_rules

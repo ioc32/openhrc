@@ -1,0 +1,5 @@
+# templated by ansible
+
+{% for item in dhcp.static_mappings %}
+{{ item.mac }} {{ item.host }}
+{% endfor %}
