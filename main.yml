@@ -4,8 +4,19 @@
     vars_files:
       - vars.yml
     tasks:
+      - name: configure network intefaces
+        template: src=templates/hostname.if dest=/etc/hostname.{{item.value.iface}}
+                  owner=root group=wheel mode=0640
+        with_dict: "{{ interfaces }}"
+      - name: configure gateway
+        template: src=templates/mygate dest=/etc/mygate
+                  owner=root group=wheel mode=0640
+        when: interfaces.wan.gateway
+      - name: configure gateway (2)
+        file: path=/etc/mygate state=absent
+        when: not interfaces.wan.gateway
       - name: enable OpenHRC services
-        service: name={{item.name}} args="{{ item.args|default('') }} " enabled=yes
+        service: name={{item.name}} args="{{ item.args|default('') }}" enabled=yes
         with_items: "{{ base_daemons }}"
       - name: enable user services
         service: name={{item.name}} args="{{item.args|default('')}}" enabled={{item.enabled}}
