@@ -1,6 +1,6 @@
 ---
   - hosts: all
-    gather_facts: yes
+    gather_facts: no
     vars_files:
       - vars.yml
     tasks:

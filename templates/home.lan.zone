@@ -3,7 +3,7 @@
 $TTL    3600
 $ORIGIN {{ dns.authoritative.zone }}.
 @  1D  IN  SOA ns0.{{ dns.authoritative.zone }}. hostmaster.{{ dns.authoritative.zone }}. (
-                              {{ ansible_date_time.epoch }} ; serial
+                              {{ lookup('pipe','date +%s') }} ; serial
                               3H ; refresh
                               15 ; retry
                               1w ; expire
