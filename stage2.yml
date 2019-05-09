@@ -1,6 +1,5 @@
 ---
-  - hosts: localhost
-    connection: local
+  - hosts: all
     gather_facts: yes
     vars_files:
       - vars.yml
