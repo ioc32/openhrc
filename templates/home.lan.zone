@@ -13,6 +13,7 @@ $ORIGIN {{ dns.authoritative.zone }}.
 ; glue record
 ns0    IN A      127.0.0.1
 ; user records
+openhrc				IN	A	{{ interfaces.lan.ip4 | ipaddr('host/prefix') | ipaddr('address') }}
 {% for item in dns.authoritative.records %}
 {{ item }}
 {% endfor %}
