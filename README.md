@@ -175,3 +175,31 @@ dns:
 **Q:** Is the authoritative DNS server accessible externally?
 
 **A:** No, NSD binds to localhost and only unbound (servicing LAN queries) forwards queries to it.
+
+**Q:** How can I perform a clean re-install/upgrade of OpenBSD?
+
+**A:** From the existing installation, fetch the appropriate `bsd.rd` for the release you wish to install:
+
+~~~~~~
+# ftp -o /bsd-installer.rd https://cdn.openbsd.org/pub/OpenBSD/${RELEASE}/amd64/bsd.rd
+~~~~~~
+
+Compare the output of `sha256(1)` against that listed in `https://cdn.openbsd.org/pub/OpenBSD/${RELEASE}/amd64/SHA256`.
+
+Console your contraption and reboot the system. Upon reboot, the kernel loader prompt will appear.
+Configure the serial output for the re-installation process:
+
+~~~~~~
+>> OpenBSD/amd64 BOOT 3.43
+boot> stty com0 115200
+
+com0: 115200 baud
+boot> bsd-installer.rd
+~~~~~~
+
+The OpenBSD Ram Disk will greet you, proceed as required:
+
+~~~~~~
+Welcome to the OpenBSD/amd64 X.X installation program.
+(I)nstall, (U)pgrade, (A)utoinstall or (S)hell?
+~~~~~~
