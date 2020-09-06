@@ -4,7 +4,6 @@ RELEASE=$(sysctl kern.version | grep -q current && echo snapshots || echo $(unam
 ARCH=$(uname -p)
 export PKG_PATH=ftp://ftp.eu.openbsd.org/pub/OpenBSD/$RELEASE/packages/$ARCH/
 echo "Using $PKG_PATH"
-pkg_add -z python-2
 pkg_add -z ansible
 pkg_add -z git
 
