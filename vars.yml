@@ -53,9 +53,6 @@ base_daemons:
   -
     name: dhcpd
     args: "{{interfaces.lan.iface}}"
-  -
-    name: nsd
-    args: -c /var/nsd/etc/nsd.conf
 user_daemons: []
 # Sample user daemon
 #  -
