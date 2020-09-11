@@ -8,21 +8,27 @@
         template: src=templates/hostname.if dest=/etc/hostname.{{item.value.iface}}
                   owner=root group=wheel mode=0640
         with_dict: "{{ interfaces }}"
+
       - name: configure gateway
         template: src=templates/mygate dest=/etc/mygate
                   owner=root group=wheel mode=0640
         when: interfaces.wan.gateway
+
       - name: configure gateway (2)
         file: path=/etc/mygate state=absent
         when: not interfaces.wan.gateway
+
       - name: setup doas
         copy: src=files/doas.conf dest=/etc/doas.conf mode=0644
+
       - name: enable OpenHRC services
         service: name={{item.name}} args="{{ item.args|default('') }}" enabled=yes
         with_items: "{{ base_daemons }}"
+
       - name: enable user services
         service: name={{item.name}} args="{{item.args|default('')}}" enabled={{item.enabled}}
         with_items: "{{ user_daemons }}"
+
       - name: template /etc files
         template: backup=yes dest=/etc/{{item}} owner=root
                   mode=0644 src=templates/{{item}}
@@ -34,34 +40,44 @@
           - myname
           - installurl
           - ethers
+
       - name: touch /etc/pf-custom.conf
         file: owner=root mode=0644 path=/etc/pf-custom.conf state=touch
         when: firewall.enable_custom_rules
+
       - name: template unbound.conf
         template: backup=yes dest=/var/unbound/etc/unbound.conf
                   owner=_unbound group=wheel mode=0644 src=templates/unbound.conf
+
       - name: create crypto material for unbound-control
         command: unbound-control-setup -d /var/unbound/etc/
         args:
           creates: /var/unbound/etc/unbound_server.key
+
       - name: install upnp service
         openbsd_pkg: name=miniupnpd state=present
         when: firewall.enable_upnp
+
       - name: template upnp service configuration file
         template: backup=yes dest=/etc/miniupnpd.conf owner=root
                   mode=0644 src=templates/miniupnpd.conf
         when: firewall.enable_upnp
+
       - name: enable upnp service
         service: name=miniupnpd args="" enabled={{ "yes" if firewall.enable_upnp else "no" }}
+
       - name: install ddns service
         openbsd_pkg: name=inadyn state=present
         when: ddns.enabled
+
       - name: template ddns configuration file
         template: backup=yes dest=/etc/inadyn.conf owner=root
                   mode=0644 src=templates/inadyn.conf
         when: ddns.enabled
+
       - name: install user packages
         openbsd_pkg: name={{item}} state=present
         with_items: "{{ pkgs }}"
+
       - name: enable ddns service
         service: name=inadyn args="" enabled={{ "yes" if ddns.enabled else "no" }}

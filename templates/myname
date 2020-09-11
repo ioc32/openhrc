@@ -1,3 +1,3 @@
 # templated by ansible
 
-{{hostname}}
+{{ hostname }}

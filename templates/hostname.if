@@ -4,9 +4,9 @@
 dhcp
 {% else %}
 {% set ip = item.value.ip4 | ipv4('host/prefix') %}
-inet {{ip | ipaddr('address')}} {{ip | ipaddr('netmask')}} NONE
+inet {{ ip | ipaddr('address') }} {{ ip | ipaddr('netmask') }} NONE
 {% endif %}
 {% if item.value.description %}
-description "{{item.value.description}}"
+description "{{ item.value.description }}"
 {% endif %}
 up

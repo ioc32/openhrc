@@ -45,13 +45,10 @@ ntp:
     server:
       - time.cloudflare.com
 base_daemons:
-  -
-    name: unbound
+  - name: unbound
     args: -c /var/unbound/etc/unbound.conf
-  -
-    name: ntpd
-  -
-    name: dhcpd
+  - name: ntpd
+  - name: dhcpd
     args: "{{interfaces.lan.iface}}"
 user_daemons: []
 # Sample user daemon
