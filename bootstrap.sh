@@ -2,7 +2,7 @@
 
 RELEASE=$(sysctl kern.version | grep -q current && echo snapshots || echo $(uname -r))
 ARCH=$(uname -p)
-export PKG_PATH=ftp://ftp.eu.openbsd.org/pub/OpenBSD/$RELEASE/packages/$ARCH/
+export PKG_PATH=https://cdn.openbsd.org/pub/OpenBSD/$RELEASE/packages/$ARCH/
 
 echo "Using $PKG_PATH"
 pkg_add -z ansible

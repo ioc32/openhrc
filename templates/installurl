@@ -1,1 +1,1 @@
-{{ mirror }}/pub/OpenBSD/
+https://{{ mirror }}/pub/OpenBSD/
