@@ -38,7 +38,7 @@ dns:
   #   - router IN A   10.0.0.1
   #   - foo IN A   10.0.0.2
 ntp:
-  enable_server: true
+  enabled: true
   pools:
     servers:
       - 0.openbsd.pool.ntp.org
@@ -52,11 +52,9 @@ base_daemons:
     args: "{{interfaces.lan.iface}}"
 user_daemons: []
 # Sample user daemon
-#  -
-#    name: sndiod
+#  - name: sndiod
 #    enabled: no
-#  -
-#    name: sensorsd
+#  - name: sensorsd
 #    enabled: yes
 sysctls:
   net.inet.ip.forwarding: 1
@@ -68,13 +66,11 @@ firewall:
   enable_upnp: false
   port_forwardings: []
 # Sample port forwards
-#    -
-#      external_ports: 8080
+#    - external_ports: 8080
 #      target: 10.0.0.51
 #      internal_ports: 80
 #      protocols: tcp
-#    -
-#      external_ports: 1234
+#    - external_ports: 1234
 #      target: 10.0.0.51
 #      internal_ports: 1234
 #      protocols: udp,tcp
