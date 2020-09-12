@@ -1,5 +1,5 @@
 ---
-mirror: ftp://ftp.eu.openbsd.org
+mirror: cdn.openbsd.org
 hostname: openhrc
 interfaces:
   wan:
