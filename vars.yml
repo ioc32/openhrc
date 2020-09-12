@@ -37,8 +37,10 @@ dns:
   # Sample records
   #   - router IN A   10.0.0.1
   #   - foo IN A   10.0.0.2
+  rpz:
+    enable: false
 ntp:
-  enabled: true
+  enable: true
   pools:
     servers:
       - 0.openbsd.pool.ntp.org
@@ -53,9 +55,9 @@ base_daemons:
 user_daemons: []
 # Sample user daemon
 #  - name: sndiod
-#    enabled: no
+#    enable: no
 #  - name: sensorsd
-#    enabled: yes
+#    enable: yes
 sysctls:
   net.inet.ip.forwarding: 1
   net.inet6.ip6.forwarding: 1
@@ -75,10 +77,9 @@ firewall:
 #      internal_ports: 1234
 #      protocols: udp,tcp
 ddns:
-    enabled: false
+    enable: false
     update_period_sec: 600
     username: test
     password: test
     dyndns_system: default@freedns.afraid.org
     alias: test.mooo.com
-

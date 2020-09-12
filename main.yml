@@ -41,11 +41,11 @@
           enabled=yes
         with_items: "{{ base_daemons }}"
 
-      - name: enable user services
+      - name: setup user services
         service:
           name={{item.name}}
           args="{{item.args|default('')}}"
-          enabled={{item.enabled}}
+          enabled={{ "yes" if item.enable else "no" }}
         with_items: "{{ user_daemons }}"
 
       - name: template /etc files
@@ -81,10 +81,27 @@
           group=wheel
           mode=0644
 
-      - name: create crypto material for unbound-control
-        command: unbound-control-setup -d /var/unbound/etc/
-        args:
-          creates: /var/unbound/etc/unbound_server.key
+      - block:
+          - name: template RPZ zone update script
+            template:
+              backup=yes
+              src=templates/update-rpz.sh
+              dest=/usr/local/sbin
+              owner=root
+              mode=0770
+
+          - name: Run RPZ zone update script once at startup
+            cron:
+              name="daily RPZ zone update script"
+              job=/usr/local/sbin/update-rpz.sh
+              special_time=reboot
+
+          - name: Run RPZ zone update script daily
+            cron:
+              name="daily RPZ zone update script"
+              job=/usr/local/sbin/update-rpz.sh
+              special_time=daily
+        when: dns.rpz.enable
 
       - name: install upnp service
         openbsd_pkg:
@@ -111,7 +128,7 @@
         openbsd_pkg:
           name=inadyn
           state=present
-        when: ddns.enabled
+        when: ddns.enable
 
       - name: template ddns configuration file
         template:
@@ -120,7 +137,7 @@
           owner=root
           mode=0644
           src=templates/inadyn.conf
-        when: ddns.enabled
+        when: ddns.enable
 
       - name: install user packages
         openbsd_pkg:
@@ -132,4 +149,4 @@
         service:
           name=inadyn
           args=""
-          enabled={{ "yes" if ddns.enabled else "no" }}
+          enabled={{ "yes" if ddns.enable else "no" }}
