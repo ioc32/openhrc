@@ -1,0 +1,4 @@
+# Ansible-managed
+{% for asn in pfbadhost.asns %}
+{{ asn }}
+{% endfor %}

@@ -29,8 +29,8 @@
         when: not interfaces.wan.gateway
 
       - name: setup doas
-        copy:
-          src=files/doas.conf
+        template:
+          src=templates/doas.conf
           dest=/etc/doas.conf
           mode=0644
 
@@ -133,3 +133,62 @@
           name=inadyn
           args=""
           enabled={{ "yes" if ddns.enabled else "no" }}
+
+      - name: setup pf-badhost script
+        block:
+          - name: create _pfbadhost user
+            user:
+              name: _pfbadhost
+              shell: /sbin/nologin
+              home: /var/empty
+
+          - name: fetch pf-badhost script
+            get_url:
+              url: https://geoghegan.ca/pub/pf-badhost/0.5/pf-badhost.sh
+              dest: /usr/local/bin/pf-badhost
+              owner: root
+              group: bin
+              mode: '0755'
+            register: get_url_res
+
+          - name: create pf-badhost logging directory
+            file:
+              path: /var/log/pf-badhost
+              state: directory
+              owner: root
+              group: wheel
+              mode: '0755'
+
+          - name: initialize pf-badhost files
+            file:
+              path: "{{ item }}"
+              state: touch
+              owner: _pfbadhost
+              group: wheel
+              mode: '0640'
+            loop:
+              - /etc/pf-badhost.txt
+              - /var/log/pf-badhost/pf-badhost.log
+              - /var/log/pf-badhost/pf-badhost.log.0.gz
+
+          - name: initialize pf-badhost files
+            template:
+              src: templates/pf-badhost-asns.txt
+              dest: /etc/pf-badhost-asns.txt
+              owner: _pfbadhost
+              group: wheel
+              mode: '0640'
+
+          - name: add _pfbadhost crontab
+            cron:
+              name: daily pfbadhost table update
+              user: _pfbadhost
+              job: -s pf-badhost -O openbsd -j /etc/pf-badhost-asns.txt
+              special_time=daily
+
+          - name: run pfbadhost script
+            command:
+              cmd: doas -u _pfbadhost pf-badhost -O openbsd -j /etc/pf-badhost-asns.txt
+            when: get_url_res.changed
+
+        when: pfbadhost.enabled
