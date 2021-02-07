@@ -81,4 +81,10 @@ ddns:
     password: test
     dyndns_system: default@freedns.afraid.org
     alias: test.mooo.com
-
+pfbadhost:
+    enabled: true
+    authlog: no
+    asns: []
+# Sample ASNs: https://www.facebook.com/peering/
+#     - AS32934
+#     - AS63293
