@@ -5,8 +5,7 @@ ARCH=$(uname -p)
 export PKG_PATH=https://cdn.openbsd.org/pub/OpenBSD/$RELEASE/packages/$ARCH/
 
 echo "Using $PKG_PATH"
-pkg_add -z ansible
-pkg_add -z git
+pkg_add -z ansible git py3-netaddr
 
 if [[ -d ".git" ]]
 then
