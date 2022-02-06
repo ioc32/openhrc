@@ -77,7 +77,7 @@ firewall:
 ddns:
     enabled: false
     update_period_sec: 600
-    # Pull has from https://freedns.afraid.org/dynamic/
+    # Pull hash from https://freedns.afraid.org/dynamic/
     hash: foobar
     system: default@freedns.afraid.org
     alias: test.mooo.com
